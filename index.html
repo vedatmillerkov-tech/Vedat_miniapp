@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vedat Trading</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0b0b0d;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding: 28px 20px;
+    }
+
+    .app {
+      max-width: 430px;
+      margin: auto;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      margin: 10px auto 18px;
+      border-radius: 22px;
+      background: #ff7a00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      box-shadow: 0 0 30px rgba(255,122,0,.25);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #8f9299;
+      margin: 8px 0 32px;
+    }
+
+    .card {
+      background: #17171b;
+      border: 1px solid #29292f;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #999ca3;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 15px;
+      padding: 16px;
+      margin-top: 16px;
+      background: #ff7a00;
+      color: #111;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .account {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status {
+      color: #ff7a00;
+      font-weight: 700;
+    }
+
+    .footer {
+      text-align: center;
+      color: #555860;
+      font-size: 12px;
+      margin-top: 28px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div class="logo">V</div>
+
+    <h1>Vedat Trading</h1>
+    <div class="subtitle">AI Market Analysis</div>
+
+    <div class="card">
+      <h2>📊 Market Analysis</h2>
+      <p>Upload your market chart and receive an AI-powered analysis.</p>
+      <button onclick="openAnalysis()">Analyze Market</button>
+    </div>
+
+    <div class="card">
+      <h2>💰 Money Management</h2>
+      <p>Manage risk and calculate your trading position.</p>
+      <button onclick="openMoney()">Open Money Management</button>
+    </div>
+
+    <div class="card account">
+      <div>
+        <h2>👤 My Account</h2>
+        <p id="username">Telegram User</p>
+      </div>
+
+      <div class="status">ACTIVE</div>
+    </div>
+
+    <div class="footer">
+      Vedat Trading Bot
+    </div>
+
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+
+    tg.ready();
+    tg.expand();
+
+    const user = tg.initDataUnsafe?.user;
+
+    if (user) {
+      document.getElementById("username").textContent =
+        user.first_name || user.username || "Telegram User";
+    }
+
+    function openAnalysis() {
+      tg.showAlert("Market Analysis is ready for connection.");
+    }
+
+    function openMoney() {
+      tg.showAlert("Money Management is coming next.");
+    }
+  </script>
+
+</body>
+</html>
