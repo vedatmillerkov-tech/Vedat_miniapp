@@ -118,6 +118,13 @@
       <button onclick="openAnalysis()">Analyze Market</button>
     </div>
 
+    <div id="analysisPanel" class="card" style="display:none;">
+      <h2>📊 AI Market Analysis</h2>
+      <p>Upload your market chart</p>
+      <input type="file" id="chartInput" accept="image/*">
+      <button onclick="analyzeChart()">Analyze Chart</button>
+      <div id="analysisResult"></div>
+    </div>
     <div class="card">
       <h2>💰 Money Management</h2>
       <p>Manage risk and calculate your trading position.</p>
@@ -152,10 +159,35 @@
         user.first_name || user.username || "Telegram User";
     }
 
-function openAnalysis() {
-  tg.sendData("market_analysis");
-}
+    function openAnalysis() {
+      document.getElementById("analysisPanel").style.display = "block";
+      document.getElementById("analysisPanel").scrollIntoView({ behavior: "smooth" });
+    }
 
+    function analyzeChart() {
+      const input = document.getElementById("chartInput");
+
+      if (!input.files || !input.files[0]) {
+        tg.showAlert("Please select a market chart first.");
+        return;
+      }
+
+      const file = input.files[0];
+      const reader = new FileReader();
+
+  document.getElementById("analysisResult").innerHTML =
+    "⌛ Analyzing chart...";
+
+  reader.onload = function () {
+    const imageData = reader.result;
+    tg.sendData(JSON.stringify({
+      type: "market_analysis",
+      image: imageData
+    }));
+  };
+
+  reader.readAsDataURL(file);
+}
     function openMoney() {
       tg.showAlert("Money Management is coming next.");
     }
