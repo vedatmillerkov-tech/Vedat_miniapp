@@ -152,9 +152,10 @@
         user.first_name || user.username || "Telegram User";
     }
 
-    function openAnalysis() {
-      tg.showAlert("Market Analysis is ready for connection.");
-    }
+function openAnalysis() {
+  tg.sendData("market_analysis");
+  tg.close();
+}
 
     function openMoney() {
       tg.showAlert("Money Management is coming next.");
